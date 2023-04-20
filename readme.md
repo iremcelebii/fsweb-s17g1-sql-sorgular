@@ -79,6 +79,7 @@ Aşağıda istenilen sonuçlara ulaşabilmek için gerekli SQL sorgularını alt
     10) Kitaplar tablosundaki sayfa sayısı 50 ile 200 arasında olan kitapların adını ve sayfa sayısını listeleyiniz.
 
     SELECT kitapadi, sayfasayisi FROM kitap WHERE sayfasayisi<=200 AND sayfasayisi>=50
+    SELECT kitapadi, sayfasayisi FROM kitap WHERE sayfasayisi BETWEEN 50 AND 200
 
     11) Öğrenci tablosunda adı Fidan, İsmail ve Leyla olan öğrencileri listeleyiniz.
 
@@ -87,7 +88,7 @@ Aşağıda istenilen sonuçlara ulaşabilmek için gerekli SQL sorgularını alt
     12) Öğrenci tablosundaki öğrencilerden adı A, D ve K ile başlayan öğrencileri listeleyiniz.
 
     SELECT * FROM ogrenci WHERE ograd LIKE ("A%") OR  ograd LIKE ("D%") OR  ograd LIKE ("K%") ORDER BY ograd
-
+    SELECT * FROM ogrenci WHERE ogrsoyad LIKE "%B%" AND (ograd LIKE ("A%") OR  ograd LIKE ("D%") OR  ograd LIKE ("K%"))  ORDER BY ograd
 
     13) Öğrenci tablosundaki sınıfı 9A olan Erkekleri veya sınıfı 9B olan kızların adını, soyadını, sınıfını ve cinsiyetini listeleyiniz.
 
@@ -100,6 +101,7 @@ Aşağıda istenilen sonuçlara ulaşabilmek için gerekli SQL sorgularını alt
     15) Öğrenci tablosunda doğum yılı 1989 olan öğrencileri listeleyiniz.
 
     SELECT * FROM ogrenci WHERE dtarih=1989
+    SELECT * FROM ogrenci WHERE YEAR (dtarih)=1989 AND MONTH (dtarih)=4
 
     16) Öğrenci numarası 30 ile 50 arasında olan Kız öğrencileri listeleyiniz.
 
@@ -115,24 +117,31 @@ Aşağıda istenilen sonuçlara ulaşabilmek için gerekli SQL sorgularını alt
 
     19) 10A sınıfındaki öğrencileri okul numarasına göre azalan olarak sıralayınız.
 
+    SELECT * FROM ogrenci WHERE  sinif="10A" ORDER BY ogrno
 
-    20) Öğrenciler tablosundaki ilk 10 kaydı listeleyiniz.
-    [İPUCU: `Select top tüm mysql versiyonlarında düzgün çalışmaz. LİMİT kullanmak daha faydalıdır`]
+    20) Öğrenciler tablosundaki ilk 10 kaydı listeleyiniz. [İPUCU: `Select top tüm mysql versiyonlarında düzgün çalışmaz. LİMİT kullanmak daha faydalıdır`]
+
+SELECT \* FROM ogrenci LIMIT 10
 
     21) Öğrenciler tablosundaki ilk 10 kaydın ad, soyad ve doğum tarihi bilgilerini listeleyiniz.
 
+     SELECT ograd,ogrsoyad,dtarih  FROM ogrenci LIMIT 10
 
     22) Sayfa sayısı en fazla olan kitabı listeleyiniz.
 
+    SELECT * FROM kitap ORDER BY sayfasayisi DESC LIMIT 1
 
     23) Öğrenciler tablosundaki en genç öğrenciyi listeleyiniz.
 
+    SELECT * FROM ogrenci ORDER BY dtarih DESC  LIMIT 1
 
     24) 10A sınıfındaki en yaşlı öğrenciyi listeyin.
 
+    SELECT * FROM ogrenci WHERE sinif="10A" AND dtarih IS NOT NULL ORDER BY dtarih LIMIT 1
 
     25) İkinci harfi N olan kitapları listeleyiniz.
 
+     SELECT * FROM kitap WHERE kitapadi like "_N%"
 
     26) Öğrencileri sınıflarına göre gruplayarak listeleyin.
 
@@ -151,3 +160,7 @@ Aşağıda istenilen sonuçlara ulaşabilmek için gerekli SQL sorgularını alt
     30) Öğrenci tablosunda aynı isimde kaçar öğrenci olduğunu bulmak istiyoruz.
     Öğrenci isimlerinin sayısını "adet" olarak öğrencilerin isimleri "isim" olarak listeleyin.
     [İPUCU: count() ve group by]
+
+BOŞ OLANLAR GELMESİN --> WHERE cinsiyet IS NOT NULL AND dtarih IS NOT NULL
+TEKRAR EDENLER GELMESİN --> SELECT DISTINCT ograd FROM ogrenci
+SUB QUERY --> SORGU İÇİNDE SORGU WHERE o.ogrno=(SELECT ogrno FROM ogrenci WHERE sinif="9A" ORDER BY dtarih LIMIT 1)
