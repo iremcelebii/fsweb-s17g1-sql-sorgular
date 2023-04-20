@@ -78,30 +78,40 @@ Aşağıda istenilen sonuçlara ulaşabilmek için gerekli SQL sorgularını alt
 
     10) Kitaplar tablosundaki sayfa sayısı 50 ile 200 arasında olan kitapların adını ve sayfa sayısını listeleyiniz.
 
+    SELECT kitapadi, sayfasayisi FROM kitap WHERE sayfasayisi<=200 AND sayfasayisi>=50
 
     11) Öğrenci tablosunda adı Fidan, İsmail ve Leyla olan öğrencileri listeleyiniz.
 
+    SELECT * FROM ogrenci WHERE ograd IN("Fidan","İsmail","Leyla") ORDER BY ograd
 
     12) Öğrenci tablosundaki öğrencilerden adı A, D ve K ile başlayan öğrencileri listeleyiniz.
+
+    SELECT * FROM ogrenci WHERE ograd LIKE ("A%") OR  ograd LIKE ("D%") OR  ograd LIKE ("K%") ORDER BY ograd
 
 
     13) Öğrenci tablosundaki sınıfı 9A olan Erkekleri veya sınıfı 9B olan kızların adını, soyadını, sınıfını ve cinsiyetini listeleyiniz.
 
+    SELECT ograd,ogrsoyad,sinif,cinsiyet FROM ogrenci WHERE (sinif="9A" AND cinsiyet="E") OR  (sinif="9B" AND cinsiyet="K") ORDER BY cinsiyet
 
     14) Sınıfı 10A veya 10B olan erkekleri listeleyiniz.
 
+    SELECT ograd,ogrsoyad,sinif,cinsiyet FROM ogrenci WHERE (sinif="9A" OR sinif="9B" ) AND cinsiyet="E" ORDER BY sinif
 
     15) Öğrenci tablosunda doğum yılı 1989 olan öğrencileri listeleyiniz.
 
+    SELECT * FROM ogrenci WHERE dtarih=1989
 
     16) Öğrenci numarası 30 ile 50 arasında olan Kız öğrencileri listeleyiniz.
 
+    SELECT * FROM ogrenci WHERE ogrno>=30 AND ogrno<=50  AND cinsiyet="K" ORDER BY ogrno
 
     17) Öğrencileri adına göre sıralayınız (alfabetik).
 
+    SELECT * FROM ogrenci ORDER BY ograd
 
     18) Öğrencileri adına, adı aynı olanlarıda soyadlarına göre sıralayınız.
 
+    SELECT * FROM ogrenci ORDER BY ograd,ogrsoyad
 
     19) 10A sınıfındaki öğrencileri okul numarasına göre azalan olarak sıralayınız.
 
