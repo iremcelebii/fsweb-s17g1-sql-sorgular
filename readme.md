@@ -121,7 +121,7 @@ Aşağıda istenilen sonuçlara ulaşabilmek için gerekli SQL sorgularını alt
 
     20) Öğrenciler tablosundaki ilk 10 kaydı listeleyiniz. [İPUCU: `Select top tüm mysql versiyonlarında düzgün çalışmaz. LİMİT kullanmak daha faydalıdır`]
 
-SELECT \* FROM ogrenci LIMIT 10
+    SELECT * FROM ogrenci LIMIT 10
 
     21) Öğrenciler tablosundaki ilk 10 kaydın ad, soyad ve doğum tarihi bilgilerini listeleyiniz.
 
@@ -149,11 +149,15 @@ SELECT \* FROM ogrenci LIMIT 10
     27) Öğrencileri her sorgulamada sıralaması farklı olacak şekilde rastgele listeleyin.
     [İPUCU: rand() fonksiyonu]
 
+    SELECT  *  FROM ogrenci  ORDER BY rand()
 
     28) Öğrenci tablosundan Rastgele bir öğrenci seçiniz.
 
+    SELECT  *  FROM ogrenci  ORDER BY rand() LIMIT 1
 
     29) 10A sınıfından rastgele bir öğrencinin adını, soyadını, numarasını ve sınıfını getirin.
+
+    SELECT  ograd, ogrsoyad,ogrno,sinif  FROM ogrenci WHERE sinif="10A" ORDER BY rand() LIMIT 1
 
 
     # Esnek
